@@ -29,13 +29,16 @@ RUN useradd -G www-data,root -u 1000 -d /home/www www
 RUN mkdir -p /home/www/.composer && \
     chown -R www:www-data /home/www
 
+# Copy application code
+COPY . /var/www
+
 # Set proper permissions for Laravel
 RUN mkdir -p /var/www/storage /var/www/bootstrap/cache
 RUN chown -R www:www-data /var/www
 RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
-# Copy application code
-COPY . /var/www
+# Install dependencies with Composer as root user
+RUN cd /var/www && composer install --no-interaction --optimize-autoloader
 
 # Set proper ownership
 RUN chown -R www:www-data /var/www

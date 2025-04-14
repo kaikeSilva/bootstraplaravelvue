@@ -2,6 +2,7 @@
 
 # Create Laravel project
 composer create-project laravel/laravel .
+composer install
 
 # Copy environment file
 cp .env.example .env

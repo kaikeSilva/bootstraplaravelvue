@@ -26,7 +26,7 @@ services:
       - DB_PASSWORD=secret
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-    command: php artisan serve --host=0.0.0.0 --port=8000
+    command: bash -c "cd /var/www && composer install && cp -n .env.example .env && php artisan key:generate && php artisan serve --host=0.0.0.0 --port=8000"
 
   # Vue.js Frontend
   frontend:
